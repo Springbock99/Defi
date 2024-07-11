@@ -1,0 +1,11 @@
+{
+  "name": "defi",
+  "version": "1.0.0",
+  "description": "Solidity, Hardhat, Defi, Nfts, ERC-20, Typescript, various different solidity projects and testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
