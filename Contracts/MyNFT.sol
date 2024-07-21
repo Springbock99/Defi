@@ -59,7 +59,5 @@ contract MyNFT is ERC721, Ownable {
      * @dev Internal function to ensure that the tokenId is owned by the contract.
      * @param tokenId The ID of the token to check ownership for.
      */
-    function _requireOwned(uint256 tokenId) internal view override {
-        require(ownerOf(tokenId) == address(this), "Token not owned by contract");
-    }
+   
 }
