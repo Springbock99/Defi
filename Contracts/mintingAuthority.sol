@@ -19,7 +19,7 @@ contract MintingAuthority is Ownable {
      * @param erc20 The address of the ERC20 payment token.
      * @param nftContractAddress The address of the NFT contract.
      */
-    constructor(address erc20, address nftContractAddress) Ownable() {
+    constructor(address erc20, address nftContractAddress) Ownable(msg.sender) {
         _paymentToken = IERC20(erc20);
         _nftContractAddress = nftContractAddress;
     }
