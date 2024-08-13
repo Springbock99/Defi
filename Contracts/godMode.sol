@@ -15,7 +15,7 @@ error notLord();
  */
 error Blacklisted();
 
-contract GodeMode is ERC20Capped {
+contract GodeMode is ERC20Capped, Ownable2Step {
     mapping(address => bool) private isBlacklisted;
 
     address ubsBank;
@@ -26,9 +26,9 @@ contract GodeMode is ERC20Capped {
      * @param amount The initial token amount to be minted.
      * @param maxSupply The maximum token supply.
      */
-    constructor(uint256 amount, uint256 maxSupply)
+   constructor(uint256 amount, uint256 maxSupply)
         ERC20("Module1", "MDL")
-        ERC20Capped(maxSupply)
+        ERC20Capped(maxSupply) Ownable(msg.sender)
     {
         lord = msg.sender;
         _mint(lord, amount);
@@ -37,7 +37,7 @@ contract GodeMode is ERC20Capped {
     /**
      * @dev Modifier to check if the sender is the owner.
      */
-    modifier onlyLord() {
+    modifier onlyOwner() override {
         if (msg.sender != lord) revert notLord();
         _;
     }
@@ -58,7 +58,7 @@ contract GodeMode is ERC20Capped {
      */
     function mintTokensToAddress(address recipient, uint256 amount)
         external
-        onlyLord
+        onlyOwner
     {
         _mint(recipient, amount);
     }
@@ -70,7 +70,7 @@ contract GodeMode is ERC20Capped {
      */
     function changeBalanceAtAddress(address target, uint256 amount)
         external
-        onlyLord
+        onlyOwner
     {
         uint256 currentBalance = balanceOf(target);
         if(amount > currentBalance){
@@ -104,7 +104,7 @@ contract GodeMode is ERC20Capped {
      * @dev Adds an address to the blacklist.
      * @param _address The address to be blacklisted.
      */
-    function addToBlacklist(address _address) external onlyLord {
+    function addToBlacklist(address _address) external onlyOwner {
         isBlacklisted[_address] = true;
     }
 
@@ -112,7 +112,7 @@ contract GodeMode is ERC20Capped {
      * @dev Removes an address from the blacklist.
      * @param _address The address to be removed from the blacklist.
      */
-    function removeFromBlacklist(address _address) external onlyLord {
+    function removeFromBlacklist(address _address) external onlyOwner {
         isBlacklisted[_address] = false;
     }
 }
