@@ -16,11 +16,6 @@ error notOwner();
 error noFunds();
 
 /**
- * @dev Emitted when an operation is attempted that would exceed the maximum token supply.
- */
-error exceedsMaxSupply();
-
-/**
  * @dev Emitted when a negative value is encountered.
  */
 error minusZ();
@@ -66,7 +61,6 @@ contract TokenSale is ERC20Capped {
      */
     function mintTokens() external payable {
         if (msg.value <= Token_Value) revert noFunds();
-        if (totalSupply() + 1000 * 1e18 >= Max_Value) revert exceedsMaxSupply();
         uint256 tokensToMint = 1000 * 1e18;
         if (balanceOf(address(this)) >= tokensToMint) {
             transfer(msg.sender, tokensToMint);
