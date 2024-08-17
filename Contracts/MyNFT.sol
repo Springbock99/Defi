@@ -39,7 +39,7 @@ contract MyNFT is ERC721, Ownable {
         override
         returns (string memory)
     {
-        _requireOwned(tokenId);
+        requireOwned(tokenId);
         string memory baseURI = _baseURI();
         return
             bytes(baseURI).length > 0
@@ -55,9 +55,12 @@ contract MyNFT is ERC721, Ownable {
         return "ipfs://QmYPdi5nLPCrEugAZoxaqhK1RyEyoz3w4pb6tLuKqf5Sd7/";
     }
 
-    /**
+     /**
      * @dev Internal function to ensure that the tokenId is owned by the contract.
      * @param tokenId The ID of the token to check ownership for.
      */
+    function requireOwned(uint256 tokenId) internal view {
+        require(ownerOf(tokenId) == address(this), "Token not owned by contract");
+    }
    
 }
