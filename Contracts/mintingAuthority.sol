@@ -39,7 +39,7 @@ contract MintingAuthority is Ownable {
      * @param to The address to withdraw tokens to.
      * @param amount The amount of ERC20 tokens to withdraw.
      */
-    function withdrawERC20(address to, uint256 amount) external onlyOwner {
-        require(_paymentToken.transfer(to, amount), "Token transfer failed");
+    function withdrawERC20(address from, uint256 amount) external onlyOwner {
+        require(_paymentToken.transfer(from, amount), "Token transfer failed");
     }
 }
