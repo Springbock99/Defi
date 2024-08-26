@@ -11,7 +11,7 @@ import "../Contracts/MyNFT.sol";
 contract MintingAuthority is Ownable {
     address private _nftContractAddress;
     IERC20 private _paymentToken;
-    uint256 public constant PRICE = 20 * 1e18;
+    uint256 public constant PRICE = 10 * 1e18;
     uint256 public totalsupply = 0;
 
     /**
